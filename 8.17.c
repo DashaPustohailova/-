@@ -11,9 +11,9 @@ int proverka( char *start, char *end);
 int main(void)
 {
 	char line[MAXLINE];
-	gets(line);
+	fgets(line, MAXLINE,stdin);
 	process_line(line);
-	puts(line);
+	puts(line, MAXLINE,stdout);
 	return 0;
 }
 
@@ -35,7 +35,7 @@ void process_line(char line[])
 	do
 	{
 		c = *line_ptr;//взять текущий символ
-		if (c == ' ' || c == '.' || c == ',' || c == '\n'||c=='\0')
+		if ((c <'a'||c>'z')&&(c<'A'||c>'Z'))
 		{
 			if (flag == YES)//найден первый разделитель после слова
 			{
@@ -44,7 +44,7 @@ void process_line(char line[])
 				{
 					char *src = end + 1;
 					char *dst = start;
-					while ((*dst++ = *src++) != '\0');
+					while (*dst++ = *src++) ;
 					line_ptr = start;//начать проверку с текущего слова
 				}
 			}
@@ -60,7 +60,7 @@ void process_line(char line[])
 		}
 		line_ptr++;//продвинуть указатель на текущий символ
 	} 
-	while (c != '\0');
+	while (c!='\0' );
 
 }
 
